@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+    :focus {
+      outline: 2px solid rgba(0,150,255,0.7);
+    }
+    .modal {
+      transition: 0.5s;
+    }
+    .modal.open {
+      border: 2px solid black;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Focus Demo</h1>
+
+  <p>No Focus.</p>
+  <p>No Focus.</p>
+  <p tabindex="0">Focus.</p>
+  <p tabindex="0">Focus.</p>
+  <p>No Focus.</p>
+  <p>No Focus.</p>
+  <p tabindex="0">Focus.</p>
+  <p>No Focus.</p>
+  <div class="modal">
+    <input placeholder="Username">
+    <input placeholder="Password">
+    <button>Submit</button>
+    <button class="js-modal-close">&times;</button>
+  </div>
+  <p>No Focus.</p>
+  <p tabindex="0">Focus.</p>
+  <button class="js-modal-open">Open Modal</button>
+  <p>No Focus.</p>
+  <p tabindex="0">Focus.</p>
+  <div style="display: none;">
+    <p tabindex="0">Focus. JK no display.</p>
+    <p tabindex="0">Focus. JK no display.</p>
+  </div>
+  <div style="visibility: hidden;">
+    <p tabindex="0">Focus. JK hidden.</p>
+    <p tabindex="0">Focus. JK hidden.</p>
+  </div>
+  <p tabindex="0">Focus.</p>
+  <p>No Focus.</p>
+  <button class="js-modal-unzone">Unzone Modal</button>
+  
+  <script src="focus.js"></script>
+  <script>
+    const modal = document.querySelector('.modal');
+    const modalOpenBtn = document.querySelector('.js-modal-open');
+    const modalCloseBtn = document.querySelector('.js-modal-close');
+    const modalUnzoneBtn = document.querySelector('.js-modal-unzone');
+
+    const modalZone = Focus.createZone(modal);
+    
+    modalOpenBtn.addEventListener('click', () => {
+      modal.classList.add('open');
+      modalZone.focus();
+    });
+    modalCloseBtn.addEventListener('click', () => {
+      modal.classList.remove('open');
+      modalZone.blur();
+    });
+    modalUnzoneBtn.addEventListener('click', () => {
+      Focus.destroyZone(modal);
+    });
+  </script>
+</body>
+</html>
