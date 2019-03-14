@@ -5,7 +5,9 @@
   let lastActiveElement = null;
 
   const focusQuery =
-    'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]']
+    .map(target => target + ':not([tabindex="-1"])')
+    .join(', ');
 
   const focusableChildren = element =>
     Array.from(element.querySelectorAll(focusQuery));
