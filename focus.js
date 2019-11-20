@@ -32,8 +32,10 @@
   };
 
   const blurZone = element => {
-    activeZone = null;
-    (lastActiveElement || tabbableChildren(document.body)[0]).focus();
+    if (activeZone === element) {
+      activeZone = null;
+      (lastActiveElement || tabbableChildren(document.body)[0]).focus();
+    }
   };
 
   const ensureZoneFocused = event => {
