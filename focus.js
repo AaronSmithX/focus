@@ -28,7 +28,13 @@
   const focusZone = element => {
     lastActiveElement = document.activeElement;
     activeZone = element;
-    tabbableChildren(element)[0].focus();
+    if (element.matches(focusQuery)) {
+      element.focus();
+    }
+    else {
+      elementTabbableChildren = tabbableChildren(element);
+      if (elementTabbableChildren.length) elementTabbableChildren[0].focus();
+    }
   };
 
   const blurZone = element => {
