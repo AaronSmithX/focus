@@ -5,7 +5,7 @@
   let lastActiveElement = null;
 
   const focusQuery =
-    ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]']
+    ['button', 'a[href]', 'area[href]', 'input', 'select', 'textarea', '[tabindex]']
     .map(target => target + ':not([tabindex="-1"])')
     .join(', ');
 
