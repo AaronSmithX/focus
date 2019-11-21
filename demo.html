@@ -11,6 +11,7 @@
       outline: 2px solid rgba(0,150,255,0.7);
     }
     .modal {
+      outline: 1px solid #333;
       transition: 0.5s;
     }
     .modal.open {
@@ -22,30 +23,43 @@
 <body>
   <h1>Focus Demo</h1>
 
+  <p>No Focus. Paragraph is not normally tabbable.</p>
+  <p>No Focus. Paragraph is not normally tabbable.</p>
+  <p tabindex="0">Focus. Setting tabindex="0" makes element tabbable.</p>
+  <p tabindex="0">Focus. Setting tabindex="0" makes element tabbable.</p>
+  <p>No Focus. Paragraph is not normally tabbable.</p>
+  <nav>
+    <ul>
+      <li><a href="">Focus. Anchor elements with empty href attributes are normally tabbable.</a></li>
+      <li><a href="#">Focus. Anchor elements with in-page (hash only) href attributes are normally tabbable.</a></li>
+      <li><a href>Focus. Anchor elements with href attributes, even without an empty value specified, are normally tabbable.</a></li>
+      <li><a>No Focus. Anchor elements without href attributes are not tabbable.</a></li>
+      <li><a href="#" tabindex="-1">No focus. Setting tabindex="-1" removes an otherwise tabbable anchor element from the tab order.</a></li>
+    </ul>
+  </nav>
   <p>No Focus.</p>
+  <p tabindex="0">Focus. Setting tabindex="0" makes element tabbable.</p>
   <p>No Focus.</p>
-  <p tabindex="0">Focus.</p>
-  <p tabindex="0">Focus.</p>
-  <p>No Focus.</p>
-  <a href="">Natural anchor focus</a>
-  <a href="#">Natural anchor focus</a>
-  <a href>Natural anchor focus</a>
-  <a>No href, no focus</a>
-  <a href="#" tabindex="-1">No focus - tabindex="-1"</a>
-  <p>No Focus.</p>
-  <p tabindex="0">Focus.</p>
-  <p>No Focus.</p>
-  <div class="modal">
+
+  <div class="modal js-form-modal" role="alertdialog" aria-labelledby="form-modal-title" aria-describedby="form-modal-description">
+    <h2 id="form-modal-title">Modal with Form</h2>
+    <p id="form-modal-description">This element is a zone and will be skipped when tabbing.</p>
+    <p>When the zone is focused, the tab order will be constrained to this element.</p>
+    <p>When the zone is blurred, focus will return to the previously active element.</p>
     <input placeholder="Username">
-    <input placeholder="Password">
+    <input placeholder="Password" type="password">
+    <p>There is a hidden input here that will not receive focus.</p>
+    <input type="hidden">
     <button>Submit</button>
-    <button class="js-modal-close">&times;</button>
+    <button class="js-form-modal-close">&times;</button>
   </div>
+
   <p>No Focus.</p>
   <p tabindex="0">Focus.</p>
-  <button class="js-modal-open">Open Modal</button>
+  <button class="js-form-modal-open">Open Modal</button>
   <p>No Focus.</p>
   <p tabindex="0">Focus.</p>
+  <p>No Focus. Below this paragraph are elements with <code>display: none;</code> and <code>visibility: hidden;</code>, which cause them to be removed from the tab order.</p>
   <div style="display: none;">
     <p tabindex="0">Focus. JK no display.</p>
     <p tabindex="0">Focus. JK no display.</p>
@@ -55,15 +69,20 @@
     <p tabindex="0">Focus. JK hidden.</p>
   </div>
   <p tabindex="0">Focus.</p>
-  <p>No Focus.</p>
-  <button class="js-modal-unzone">Unzone Modal</button>
+  <p>
+    No Focus.
+    You can use the button below to destroy the modal zone. This places it back into the regular tab order.
+    Notice that even when the modal isn't a zone (so it is tabbable in regular order), it can still be focused and have focus trapped inside it.
+    This API can be improved.
+  </p>
+  <button class="js-form-modal-unzone">Unzone Modal</button>
   
   <script src="focus.js"></script>
   <script>
-    const modal = document.querySelector('.modal');
-    const modalOpenBtn = document.querySelector('.js-modal-open');
-    const modalCloseBtn = document.querySelector('.js-modal-close');
-    const modalUnzoneBtn = document.querySelector('.js-modal-unzone');
+    const modal = document.querySelector('.js-form-modal');
+    const modalOpenBtn = document.querySelector('.js-form-modal-open');
+    const modalCloseBtn = document.querySelector('.js-form-modal-close');
+    const modalUnzoneBtn = document.querySelector('.js-form-modal-unzone');
 
     const modalZone = Focus.createZone(modal);
     
