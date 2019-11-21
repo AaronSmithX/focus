@@ -40,6 +40,10 @@ See `demo.html` for a working demo.
 ## Roadmap
 
 1. Maintain a stack of zone contexts. For example, one modal can open another -- an edit modal might open an "are you sure?" modal if the user attempts to close it without saving changes. In this case, when the "are you sure?" modal closes, the edit modal should regain focus -- not just the active element, but the modal itself should again have focus trapped inside it.
+1. When creating a zone, allow an additional `options` object:
+    1. `options.trap: boolean (default: true)`: If true, focus will be trapped in the zone, and after tabbing to the last element in the zone, the next element in the tab order will be the first tabbable element in the zone, and vice versa.
+    1. `options.onFocus: Function`: A function that executes when the zone is focused. Useful for animations and side effects. Helpful to consolidate this logic for a zone that might be opened from several locations in code.
+    1. `options.onBlur: Function`: A function that executes when the zone is blurred. Especially useful if focus is not trapped in the zone. For example, tabbing out of a dropdown menu could close the menu.
 1. When a zone is blurred, attempt to return focus in this priority (for smoother user experience, to avoid jarring context changes):
     1. The previous zone, if there is one.
     1. The previous active element (tracked if zone was focused programmatically).
