@@ -37,14 +37,11 @@ modalCloseButton.addEventListener('click', () => {
 
 See `demo.html` for a working demo.
 
-## Contributing
+## Roadmap
 
-Want to contribute? Create a pull request!
-
-Here's the to-do list:
-1. When the user clicks/touches into a zone, make that zone the active zone.
-1. When the user clicks/touches out of a zone, cancel its active status.
-1. When a zone is blurred, attempt to return focus in this priority:
+1. Maintain a stack of zone contexts. For example, one modal can open another -- an edit modal might open an "are you sure?" modal if the user attempts to close it without saving changes. In this case, when the "are you sure?" modal closes, the edit modal should regain focus -- not just the active element, but the modal itself should again have focus trapped inside it.
+1. When a zone is blurred, attempt to return focus in this priority (for smoother user experience, to avoid jarring context changes):
+    1. The previous zone, if there is one.
     1. The previous active element (tracked if zone was focused programmatically).
     1. The previous tabbable element in the DOM, before this zone.
     1. The first tabbable element in the body.
