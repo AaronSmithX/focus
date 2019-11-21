@@ -6,7 +6,7 @@
 
   const focusQuery =
     ['button', 'a[href]', 'area[href]', 'input', 'select', 'textarea', '[tabindex]']
-    .map(target => target + ':not([tabindex="-1"])')
+    .map(target => target + ':not([tabindex="-1"]):not([disabled])')
     .join(', ');
 
   const focusableChildren = element =>
