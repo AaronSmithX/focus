@@ -119,6 +119,10 @@
     else outerFocusNext(event);
   };
 
+  const escapeHandler = () => {
+    if (activeZone) blurZone(activeZone);
+  };
+
   const keydownListener = event => {
     if (event.keyCode === 9) {
       event.preventDefault();
@@ -128,6 +132,9 @@
       else {
         tabHandler(event);
       }
+    }
+    else if (event.keyCode === 27) {
+      escapeHandler();
     }
   };
 
