@@ -9,7 +9,7 @@
   // iframe is included so it can be specially handled,
   // as iframes provide unique challenges to manually controlling focus
   const focusQuery =
-    ['button', 'a[href]', 'area[href]', 'input', 'select', 'textarea', '[tabindex]', 'iframe'] // iframe for special handling
+    ['button', 'a[href]', 'area[href]', 'input', 'select', 'textarea', '[tabindex]', 'iframe']
     .map(target => target + ':not([tabindex="-1"]):not([disabled])')
     .join(', ');
 
@@ -128,7 +128,6 @@
 
   const keydownListener = event => {
     if (event.keyCode === 9) {
-      // event.preventDefault();
       if (event.shiftKey) {
         shiftTabHandler(event);
       }
