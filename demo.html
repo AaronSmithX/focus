@@ -40,6 +40,8 @@
   <p>No Focus.</p>
   <p tabindex="0">Focus. Setting tabindex="0" makes element tabbable.</p>
   <p>No Focus.</p>
+  <p>Cross-domain iframe outside a zone:</p>
+  <iframe src="http://www.example.com/"></iframe>
 
   <div class="modal js-form-modal" role="alertdialog" aria-labelledby="form-modal-title" aria-describedby="form-modal-description">
     <h2 id="form-modal-title">Modal with Form</h2>
@@ -52,6 +54,8 @@
     <input type="hidden">
     <button>Submit</button>
     <button class="js-form-modal-close">&times;</button>
+    <p>Cross-domain iframe inside a zone:</p>
+    <iframe src="http://www.example.com/"></iframe>
   </div>
 
   <p>No Focus.</p>
